@@ -103,6 +103,7 @@ ENV/
 # sqlite files
 *.sqlite3
 
-/static/*.mp3
-/static/*.wav
-/static/*.png
+# Ignore build files
+node_modules/
+/assets/bundles/
+webpack-stats.json

@@ -17,7 +17,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
 
-STATICFILES_DIRS = [STATIC_DIR]
+STATICFILES_DIRS = [
+    STATIC_DIR,
+    os.path.join(BASE_DIR, 'assets'),
+]
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
@@ -41,7 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'servecaptcha.apps.ServecaptchaConfig',
-    'tuisd'
+    'tuisd',
+    'webpack_loader',
 ]
 
 MIDDLEWARE = [
@@ -123,3 +127,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'CACHE': not DEBUG,
+        'BUNDLE_DIR_NAME': 'bundles/', # must end with slash
+        'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),
+        'POLL_INTERVAL': 0.1,
+        'TIMEOUT': None,
+        'IGNORE': ['.+\.hot-update.js', '.+\.map']
+    }
+}

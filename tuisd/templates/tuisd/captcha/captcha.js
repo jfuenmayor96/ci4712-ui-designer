@@ -20,7 +20,7 @@ $( "#actualizarCaptcha" ).click(function() {
       $("#audioCaptcha").attr("src", url + "/servecaptcha/audio/" + data.captcha_id);
     },
     failure: function(data) {
-      alert("nada");
+      console.log(data);
     }
   });
 });

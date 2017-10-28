@@ -1,4 +1,5 @@
 {% load static %}
+{% load render_bundle from webpack_loader %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -10,18 +11,11 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <title>TUIsD - JSWeCan</title>
-  <!-- Bootstrap core CSS-->
-  <link href="{% static 'tuisd/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-  <!-- Custom fonts for this template-->
-  <link href="{% static 'tuisd/vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
-  <!-- Custom styles for this template-->
-  <link href="{% static 'tuisd/css/sb-admin.css' %}" rel="stylesheet">
-  <!-- TUIsD CSS -->
-  <link href="{% static 'tuisd/css/main.css' %}" rel="stylesheet">
+  {% render_bundle 'main' 'css' %}
+  {% render_bundle 'vendor' 'js' %}
+  {% render_bundle 'main' 'js' %}
   <!-- TUIsD Icon-->
   <link rel="icon" href="{% static 'tuisd/img/bird.png' %}">
-
-  <script src="{% static 'tuisd/js/jquery-3.2.1.min.js' %}"></script>
   {% block head %}{% endblock %}
 </head>
 
@@ -90,15 +84,7 @@
         </div>
       </div>
     </div>
-    <!-- Bootstrap core JavaScript-->
-    <script src="{% static 'tuisd/vendor/jquery/jquery.min.js' %}"></script>
-    <script src="{% static 'tuisd/vendor/popper/popper.min.js' %}"></script>
-    <script src="{% static 'tuisd/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
-    <!-- Core plugin JavaScript-->
-    <script src="{% static 'tuisd/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
-    <!-- Custom scripts for all pages-->
-    <script src="{% static 'tuisd/js/sb-admin.min.js' %}"></script>
-  </div>
+</div>
 </body>
 
 </html>
