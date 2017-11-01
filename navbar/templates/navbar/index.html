@@ -132,6 +132,7 @@
 			case "dropdown":
 				elements.push(element);
 				//alert(elements);
+				alert("Añadido el elemento Dropdown");
 				break
 			case "link":
 				var linkName = document.getElementById("linkName").value;
@@ -139,14 +140,14 @@
 				var linkOption = document.getElementById("linkOption").value;
 				var object = {type: "link", name: linkName, link: linkLink, option: linkOption}
 				elements.push(object);
-				//alert(elements.type);
+				alert("Añadido el elemento Link");
 				break
 			default:
 				var brandName = document.getElementById("navbarBrandName").value;
 				var brandImage = document.getElementById("navbarBrandLogo").value;
 				var object = {type: "brand", name: brandName, link: brandImage}
 				elements.push(object);
-				//alert(elements);
+				alert("Añadido el elemento Brand");
 				break
 		};
 		
@@ -154,6 +155,7 @@
 	};
 
 	$(document).on('click', '#generarCodigo', function() {
+	  alert("Se va a generar el codigo");
 	  url = 'http://localhost:8000'
 	  $.ajax({
 	    url: '/navbar/showCodigo/',
