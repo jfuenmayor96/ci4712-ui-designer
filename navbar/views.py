@@ -3,4 +3,4 @@ from django.http import HttpResponse, HttpResponseNotAllowed, Http404, JsonRespo
 
 
 def index(request):
-    return HttpResponse("hello world")
+    return render(request, 'navbar/index.html')
