@@ -20,10 +20,10 @@
 
 <div class="row">
 	<div class="col-lg-4">
-		<label for="addElement">Agregar elemento:</label>
+		<label for="elementList">Agregar elemento:</label>
 	</div>
 	<div class="col-lg-4">
-		<select name="addElement" id="addElement" onchange="showAddSection()">
+		<select name="elementList" id="elementList" onchange="showAddSection()">
 			<option value="Navbar Brand">Navbar Brand</option>
 			<option value="Link">Link</option>
 			<option value="Dropdown">Dropdown</option>
@@ -50,6 +50,7 @@
 			<option value="disabled">Deshabilitado</option>
 		</select>
 	</div>
+	<button onclick="addElement('link')">Añadir elemento</button>
 </div>
 
 
@@ -65,18 +66,32 @@
 		<label for="navbarBrandLogo">Link del logo:</label>
 		<input type="text" name="navbarBrandLogo" id="navbarBrandLogo"/>
 	</div>
+	<button onclick="addElement('brand')">Añadir elemento</button>
 </div>
 
 <div class="row" id="addDropdownSection" style="display: none">
 	<div class="col-lg-12">
 		<h2>Añadir un Dropdown</h2>
 	</div>
+	<div class="col-lg-12">
+		<label for="dropdownName">Nombre del menú desplegable:</label>
+		<input type="text" name="dropdownName" id="dropdownName"/>
+	</div>
+	<div class="col-lg-12">
+		<label for="dropdownItem1">Item:</label>
+		<input type="text" name="dropdownItem1" id="dropdownItem1"/>
+	</div>
+	<div class="col-lg-12">
+		<label for="dropdownItem1Link">Link:</label>
+		<input type="text" name="dropdownItem1Link" id="dropdownItem1Link"/>
+	</div>
+	<button onclick="addElement('dropdown')">Añadir elemento</button>
 </div>
 
 <script>
 	function showAddSection() {
 		// Obtiene el valor de la opción seleccionada
-		var selectedOption = document.getElementById("addElement").value;
+		var selectedOption = document.getElementById("elementList").value;
 
 		// Muestra la sección correspondiente para crear el elemento a añadir y oculta 
 		// las demás secciones que no corresponden con la opción actual
@@ -102,6 +117,20 @@
 
 		};
 	}
+
+	function addElement(element) {
+		switch(element) {
+			case "dropdown":
+				alert(element);
+				break
+			case "link":
+				alert(element);
+				break
+			default:
+				alert(element);
+				break
+		};
+	};
 
 </script>
 {% endblock %}
