@@ -127,15 +127,22 @@
 				//alert(element);
 				break
 			case "link":
-				elements.push(element);
+				var linkName = document.getElementById("linkName").value;
+				var linkLink = document.getElementById("linkLink").value;
+				var linkOption = document.getElementById("linkOption").value;
+				var object = {type: "link", name: linkName, link: linkLink, option: linkOption}
+				elements.push(object);
 				//alert(element);
 				break
 			default:
+				var brandName = document.getElementById("navbarBrandName").value;
+				var brandImage = document.getElementById("navbarBrandLogo").value;
+				var object = {type: "brand", name: brandName, link: brandImage}
 				elements.push(element);
 				//alert(element);
 				break
 		};
-		alert(elements);
+		console.log(elements);
 	};
 
 </script>
