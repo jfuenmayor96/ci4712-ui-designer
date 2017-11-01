@@ -20,6 +20,7 @@ from servecaptcha import urls
 urlpatterns = [
 	url(r'^formBuilder/', include('formBuilder.urls')),
 	url(r'^servecaptcha/', include('servecaptcha.urls')),
+    url(r'^navbar/', include('navbar.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^', include('tuisd.urls')),
 ]
