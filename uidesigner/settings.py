@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'servecaptcha.apps.ServecaptchaConfig',
     'tuisd',
-	'formBuilder'
+	'formBuilder',
+    'navbar'
 ]
 
 MIDDLEWARE = [
@@ -60,7 +61,7 @@ ROOT_URLCONF = 'uidesigner.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['servecaptcha/templates', 'formBuilder/templates'],
+        'DIRS': ['servecaptcha/templates', 'formBuilder/templates', 'navbar/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
