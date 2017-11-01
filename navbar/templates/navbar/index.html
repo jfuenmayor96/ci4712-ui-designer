@@ -23,7 +23,7 @@
 		<label class="col-lg-8" for="addElement">Agregar elemento:</label>
 	</div>
 	<div class="col-lg-4">
-		<select name="addElement" id="addElement" onchange="greet()">
+		<select name="addElement" id="addElement" onchange="showAddSection()">
 			<option value="Navbar Brand">Navbar Brand</option>
 			<option value="Link">Link</option>
 			<option value="Dropdown">Dropdown</option>
@@ -31,27 +31,52 @@
 	</div>
 </div>
 
-<div class="row" id="addElementSection" style="display: none">
+<div class="row" id="addLinkSection" style="display: none">
 	<div class="col-lg-12">
-		
+		<h2>Añadir un elemento</h2>
 	</div>
 </div>
 
 <div class="row" id="addBrandSection" style="display: none">
 	<div class="col-lg-12">
-		
+		<h2>Añadir un brand</h2>
 	</div>
 </div>
 
 <div class="row" id="addDropdownSection" style="display: none">
 	<div class="col-lg-12">
-		
+		<h2>Añadir un Dropdown</h2>
 	</div>
 </div>
 
 <script>
-	function greet() {
-		alert("hi");
+	function showAddSection() {
+		// Obtiene el valor de la opción seleccionada
+		var selectedOption = document.getElementById("addElement").value;
+
+		// Muestra la sección correspondiente para crear el elemento a añadir y oculta 
+		// las demás secciones que no corresponden con la opción actual
+		switch(selectedOption) {
+			case "Link":
+				document.getElementById("addLinkSection").style.display = "block";
+				document.getElementById("addBrandSection").style.display = "none";
+				document.getElementById("addDropdownSection").style.display = "none";
+				break;
+
+			case "Navbar Brand":
+				document.getElementById("addBrandSection").style.display = "block";
+				document.getElementById("addLinkSection").style.display = "none";
+				document.getElementById("addDropdownSection").style.display = "none";
+				break;
+
+			default:
+				document.getElementById("addDropdownSection").style.display = "block";
+				document.getElementById("addBrandSection").style.display = "none";
+				document.getElementById("addLinkSection").style.display = "none";
+				break;
+
+
+		};
 	}
 
 </script>
