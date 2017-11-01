@@ -89,6 +89,8 @@
 </div>
 
 <script>
+	var elements = [];
+
 	function showAddSection() {
 		// Obtiene el valor de la opción seleccionada
 		var selectedOption = document.getElementById("elementList").value;
@@ -121,15 +123,19 @@
 	function addElement(element) {
 		switch(element) {
 			case "dropdown":
-				alert(element);
+				elements.push(element);
+				//alert(element);
 				break
 			case "link":
-				alert(element);
+				elements.push(element);
+				//alert(element);
 				break
 			default:
-				alert(element);
+				elements.push(element);
+				//alert(element);
 				break
 		};
+		alert(elements);
 	};
 
 </script>
