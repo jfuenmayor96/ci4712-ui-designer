@@ -6,7 +6,55 @@
 {% endblock %}
 
 {% block content %}
+<div class="row">
+	<div class="col-lg-4">
+		<label class="col-lg-8" for="navbarType">Tipo de barra de navegación:</label>
+	</div>
+	<div class="col-lg-4">
+		<select class="col-lg-4" name="navbarType" id="navbarType">
+			<option value="fixed">Fixed</option>
+			<option value="static">Static</option>
+		</select>
+	</div>
+</div>
 
+<div class="row">
+	<div class="col-lg-4">
+		<label class="col-lg-8" for="addElement">Agregar elemento:</label>
+	</div>
+	<div class="col-lg-4">
+		<select name="addElement" id="addElement" onchange="greet()">
+			<option value="Navbar Brand">Navbar Brand</option>
+			<option value="Link">Link</option>
+			<option value="Dropdown">Dropdown</option>
+		</select>
+	</div>
+</div>
+
+<div class="row" id="addElementSection" style="display: none">
+	<div class="col-lg-12">
+		
+	</div>
+</div>
+
+<div class="row" id="addBrandSection" style="display: none">
+	<div class="col-lg-12">
+		
+	</div>
+</div>
+
+<div class="row" id="addDropdownSection" style="display: none">
+	<div class="col-lg-12">
+		
+	</div>
+</div>
+
+<script>
+	function greet() {
+		alert("hi");
+	}
+
+</script>
 {% endblock %}
 
 {% block scripts %}
