@@ -1,0 +1,27 @@
+{% autoescape off %}
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  {% for list in lista %}
+	  {% if list.type == 'brand' %}
+	  	<a class="navbar-brand" href="{{list.link}}">{{list.name}}</a>
+	  {% endif %}
+  {% endfor %}
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+	     {% for list in lista %}
+    		{% if list.type != 'brand' %}
+	     	<li class="nav-item">
+	     	  {% if list.option == 'disabled' %}
+	     	  	<a class="nav-{{list.type}} {{list.option}}" href="{{list.link}}">{{list.name}}<span class="sr-only">(current)</span></a>
+	     	  {% elif list.option == 'active' %}
+	     	  	<a class="nav-{{list.type}}" href="{{list.link}}">{{list.name}}<span class="sr-only">(current)</span></a>
+	     	  {% endif %}
+	     	</li>
+		    {% endif %}
+	     {% endfor %}
+    </ul>
+  </div>
+</nav>
+{% endautoescape %}

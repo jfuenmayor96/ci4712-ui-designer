@@ -88,6 +88,13 @@
 	<button onclick="addElement('dropdown')">Añadir dropdown</button>
 </div>
 
+
+
+<button type="button" class="btn btn-primary btn-block btn-generar-codigo">
+    <i id="generarCodigo" class="fa fa-fw fa-code" aria-hidden="true">Genera Código</i>
+</button>
+
+
 <script>
 	var elements = [];
 
@@ -124,7 +131,7 @@
 		switch(element) {
 			case "dropdown":
 				elements.push(element);
-				//alert(element);
+				//alert(elements);
 				break
 			case "link":
 				var linkName = document.getElementById("linkName").value;
@@ -132,21 +139,39 @@
 				var linkOption = document.getElementById("linkOption").value;
 				var object = {type: "link", name: linkName, link: linkLink, option: linkOption}
 				elements.push(object);
-				//alert(element);
+				//alert(elements.type);
 				break
 			default:
 				var brandName = document.getElementById("navbarBrandName").value;
 				var brandImage = document.getElementById("navbarBrandLogo").value;
 				var object = {type: "brand", name: brandName, link: brandImage}
-				elements.push(element);
-				//alert(element);
+				elements.push(object);
+				//alert(elements);
 				break
 		};
+		
 		console.log(elements);
 	};
 
+	$(document).on('click', '#generarCodigo', function() {
+	  url = 'http://localhost:8000'
+	  $.ajax({
+	    url: '/navbar/showCodigo/',
+	    type: "POST",
+	    dataType: "application/json; charset=utf-8",
+	    data: JSON.stringify(elements),
+	    success: function(data) {
+	    	alert("Se envio");
+	    },
+	    failure: function(data) {
+	      alert("nada");
+	    }
+	  });
+	});
+
 </script>
 {% endblock %}
+
 
 {% block scripts %}
 
