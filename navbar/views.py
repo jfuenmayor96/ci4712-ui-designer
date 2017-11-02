@@ -4,8 +4,13 @@ from django.views.decorators.csrf import csrf_exempt
 from django.template import loader
 from django.http import HttpResponseRedirect
 from django.template.loader import render_to_string
+from django.contrib import messages
+from django.shortcuts import render_to_response
+from django.shortcuts import redirect
+from django.template import RequestContext
 from django.utils.html import escape
 import json
+from django.core.urlresolvers import reverse
 
 def index(request):
     return render(request, 'navbar/index.html')
@@ -16,17 +21,13 @@ def showCodigo(request):
 
 	html = ''
 	if request.method == 'POST':
-		print("Entre a la vista!!!")
-		url = request.POST
 
-		listaJson = []
-
-		for i in url:
-			lista = json.loads(i)
-
-		print("La lista es:",lista)	
+		url = request.POST.get('location')
+		lista = json.loads(url)
 		html = render_to_string('navbar/navbar.html', { 'lista': lista })
-		print(html)
+		context = {'html':html}
+		template = loader.get_template('navbar/navbarCodigo.html')
+		return HttpResponse(template.render(context,request))
 
 	context = {'html':html}
 	template = loader.get_template('navbar/navbarCodigo.html')

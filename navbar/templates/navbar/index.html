@@ -90,10 +90,17 @@
 
 
 
-<button type="button" class="btn btn-primary btn-block btn-generar-codigo">
-    <i id="generarCodigo" class="fa fa-fw fa-code" aria-hidden="true">Genera Código</i>
-</button>
+<form id = "generarCodigo" action="showCodigo/" method="POST" >
+        {% csrf_token %}
+        <input type="text" id="location" name="location" value="" />
+        <input type="submit" />
 
+</form>
+
+
+{% endblock %}
+
+{% block scripts %}
 
 <script>
 	var elements = [];
@@ -155,26 +162,11 @@
 	};
 
 	$(document).on('click', '#generarCodigo', function() {
-	  alert("Se va a generar el codigo");
-	  url = 'http://localhost:8000'
-	  $.ajax({
-	    url: '/navbar/showCodigo/',
-	    type: "POST",
-	    dataType: "application/json; charset=utf-8",
-	    data: JSON.stringify(elements),
-	    success: function(data) {
-	    	alert("Se envio");
-	    },
-	    failure: function(data) {
-	      alert("nada");
-	    }
-	  });
+		document.getElementById('location').value = JSON.stringify(elements);
 	});
 
 </script>
-{% endblock %}
 
 
-{% block scripts %}
 
 {% endblock %}
