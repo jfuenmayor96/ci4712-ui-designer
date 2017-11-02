@@ -25,7 +25,11 @@ def showCodigo(request):
 		url = request.POST.get('location')
 		lista = json.loads(url)
 		html = render_to_string('navbar/navbar.html', { 'lista': lista })
-		context = {'html':escape(html),'htmlCodigo':html}
+
+		htmlNavBar = html.replace("navbar-toggleable-md","navbar-expand")
+
+		print(htmlNavBar)
+		context = {'html':escape(html),'htmlCodigo':htmlNavBar}
 		template = loader.get_template('navbar/navbarCodigo.html')
 		return HttpResponse(template.render(context,request))
 
