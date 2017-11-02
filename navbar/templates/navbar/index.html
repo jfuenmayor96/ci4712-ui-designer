@@ -137,8 +137,15 @@
 	function addElement(element) {
 		switch(element) {
 			case "dropdown":
-				elements.push(element);
-				//alert(elements);
+
+				var dropdownName      = document.getElementById("dropdownName").value;
+
+				// Falta ampliar para mas elementos
+				var dropdownItem1     = document.getElementById("dropdownItem1").value;
+				var dropdownItem1Link = document.getElementById("dropdownItem1Link").value;
+				var object = {type: "dropdown", name: dropdownName, elements:[{name: dropdownItem1,link: dropdownItem1Link}]}
+				elements.push(object);
+
 				alert("Añadido el elemento Dropdown");
 				break
 			case "link":
