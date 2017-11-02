@@ -24,7 +24,11 @@ def showCodigo(request):
 
 		url = request.POST.get('location')
 		lista = json.loads(url)		
+
 		html = render_to_string('navbar/navbar.html', { 'lista': lista })
+
+		# Se crea un codigo de navbar no responsive para mostrarlo
+		# en la vista del codigo generado.
 		htmlNavBar = html.replace("navbar-toggleable-md","navbar-expand")
 		context = {'html':escape(html),'htmlCodigo':htmlNavBar}
 		template = loader.get_template('navbar/navbarCodigo.html')
