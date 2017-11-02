@@ -6,100 +6,126 @@
 {% endblock %}
 
 {% block content %}
-<div class="row">
-	<div class="col-lg-4">
-		<label for="navbarType">Tipo de barra de navegación:</label>
-	</div>
-	<div class="col-lg-4">
-		<select class="col-lg-4" name="navbarType" id="navbarType">
-			<option value="fixed">Fixed</option>
-			<option value="static">Static</option>
-		</select>
-	</div>
+
+<div class="padded-container">
+
+<nav class="navbar navbar-expand navbar-light" style="background-color:#E6E6E6;">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div id="dynamicBrans">
+  </div>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto" id="dynamicLinks"> 
+    </ul>
+  </div>
+</nav>
+
+
+<br>
+
+
+	  <div class="card-body">
+	    
+	    <div class="row">
+
+	    	<div class="col">
+	    		<label for="navbarType">Tipo de barra de navegación:</label>
+	    	</div>
+	    	<div class="col">
+	    		<select class="col-lg-4" name="navbarType" id="navbarType">
+	    			<option value="fixed">Fixed</option>
+	    			<option value="static">Static</option>
+	    		</select>
+	    	</div>
+	    </div>
+
+	    <div class="row">
+	    	<div class="col-lg-4">
+	    		<label for="elementList">Agregar elemento:</label>
+	    	</div>
+	    	<div class="col-lg-4">
+	    		<select name="elementList" id="elementList" onchange="showAddSection()">
+	    			<option value="Navbar Brand">Navbar Brand</option>
+	    			<option value="Link">Link</option>
+	    			<option value="Dropdown">Dropdown</option>
+	    		</select>
+	    	</div>
+	    </div>
+
+	    <div class="row" id="addLinkSection" style="display: none">
+	    	<div class="col-lg-12">
+	    		<h2>Añadir un elemento</h2>
+	    	</div>
+	    	<div class="col-lg-12">
+	    		<label for="linkName">Nombre del botón:</label>
+	    		<input type="text" name="linkName" id="linkName"/>
+	    	</div>
+	    	<div class="col-lg-12">
+	    		<label for="linkLink">Link del botón:</label>
+	    		<input type="text" name="linkLink" id="linkLink"/>
+	    	</div>
+	    	<div class="col-lg-12">
+	    		<label for="linkOption">Estado del botón:</label>
+	    		<select name="linkOption" id="linkOption">
+	    			<option value="active">Habilitado</option>
+	    			<option value="disabled">Deshabilitado</option>
+	    		</select>
+	    	</div>
+	    	<button onclick="addElement('link')">Añadir link</button>
+	    </div>
+
+
+	    <div class="row" id="addBrandSection">
+	    	<div class="col-lg-12">
+	    		<h2>Añadir un brand</h2>
+	    	</div>
+	    	<div class="col-lg-12">
+	    		<label for="navbarBrandName">Nombre de la página:</label>
+	    		<input type="text" name="navbarBrandName" id="navbarBrandName"/>
+	    	</div>
+	    	<div class="col-lg-12">
+	    		<label for="navbarBrandLogo">Link del logo:</label>
+	    		<input type="text" name="navbarBrandLogo" id="navbarBrandLogo"/>
+	    	</div>
+	    	<button onclick="addElement('brand')">Añadir brand</button>
+	    </div>
+
+	    <div class="row" id="addDropdownSection" style="display: none">
+	    	<div class="col-lg-12">
+	    		<h2>Añadir un Dropdown</h2>
+	    	</div>
+	    	<div class="col-lg-12">
+	    		<label for="dropdownName">Nombre del menú desplegable:</label>
+	    		<input type="text" name="dropdownName" id="dropdownName"/>
+	    	</div>
+
+	    	<div id="dynamicInput">
+	    		<div class="col-lg-12">
+	    			<label for="dropdownItem1">Item:</label>
+	    			<input type="text" name="dropdownItem1" id="dropdownItem1"/>
+	    		</div>
+	    		<div class="col-lg-12">
+	    			<label for="dropdownItem1Link">Link:</label>
+	    			<input type="text" name="dropdownItem1Link" id="dropdownItem1Link"/>
+	    		</div>
+	    	</div>
+	    	<button onclick="addElement('dropdown')">Añadir dropdown</button>
+	    	<input type="button" value="Agregar otro elemento" onClick="addInput('dynamicInput');">
+	    </div>
+
+
+	  </div>
+
+
+	<form id = "generarCodigo" action="showCodigo/" method="POST" >
+	        {% csrf_token %}
+	        <input type="hidden" id="location" name="location" value="" />
+	        <input type="submit" />
+
+	</form>
+
 </div>
-
-<div class="row">
-	<div class="col-lg-4">
-		<label for="elementList">Agregar elemento:</label>
-	</div>
-	<div class="col-lg-4">
-		<select name="elementList" id="elementList" onchange="showAddSection()">
-			<option value="Navbar Brand">Navbar Brand</option>
-			<option value="Link">Link</option>
-			<option value="Dropdown">Dropdown</option>
-		</select>
-	</div>
-</div>
-
-<div class="row" id="addLinkSection" style="display: none">
-	<div class="col-lg-12">
-		<h2>Añadir un elemento</h2>
-	</div>
-	<div class="col-lg-12">
-		<label for="linkName">Nombre del botón:</label>
-		<input type="text" name="linkName" id="linkName"/>
-	</div>
-	<div class="col-lg-12">
-		<label for="linkLink">Link del botón:</label>
-		<input type="text" name="linkLink" id="linkLink"/>
-	</div>
-	<div class="col-lg-12">
-		<label for="linkOption">Estado del botón:</label>
-		<select name="linkOption" id="linkOption">
-			<option value="active">Habilitado</option>
-			<option value="disabled">Deshabilitado</option>
-		</select>
-	</div>
-	<button onclick="addElement('link')">Añadir link</button>
-</div>
-
-
-<div class="row" id="addBrandSection">
-	<div class="col-lg-12">
-		<h2>Añadir un brand</h2>
-	</div>
-	<div class="col-lg-12">
-		<label for="navbarBrandName">Nombre de la página:</label>
-		<input type="text" name="navbarBrandName" id="navbarBrandName"/>
-	</div>
-	<div class="col-lg-12">
-		<label for="navbarBrandLogo">Link del logo:</label>
-		<input type="text" name="navbarBrandLogo" id="navbarBrandLogo"/>
-	</div>
-	<button onclick="addElement('brand')">Añadir brand</button>
-</div>
-
-<div class="row" id="addDropdownSection" style="display: none">
-	<div class="col-lg-12">
-		<h2>Añadir un Dropdown</h2>
-	</div>
-	<div class="col-lg-12">
-		<label for="dropdownName">Nombre del menú desplegable:</label>
-		<input type="text" name="dropdownName" id="dropdownName"/>
-	</div>
-
-	<div id="dynamicInput">
-		<div class="col-lg-12">
-			<label for="dropdownItem1">Item:</label>
-			<input type="text" name="dropdownItem1" id="dropdownItem1"/>
-		</div>
-		<div class="col-lg-12">
-			<label for="dropdownItem1Link">Link:</label>
-			<input type="text" name="dropdownItem1Link" id="dropdownItem1Link"/>
-		</div>
-	</div>
-	<button onclick="addElement('dropdown')">Añadir dropdown</button>
-	<input type="button" value="Agregar otro elemento" onClick="addInput('dynamicInput');">
-</div>
-
-
-<form id = "generarCodigo" action="showCodigo/" method="POST" >
-        {% csrf_token %}
-        <input type="hidden" id="location" name="location" value="" />
-        <input type="submit" />
-
-</form>
-
 
 {% endblock %}
 
@@ -154,7 +180,7 @@
 	          	<label for=\"dropdownItem"+(counter + 1)+"Link\">Link:</label>\
 	          	<input type=\"text\" name=\"dropdownItem"+(counter + 1)+"Link\" id=\"dropdownItem"+(counter + 1)+"Link\"/>\
 	          </div>";
-	          newdiv.innerHTML = "Entry " + (counter + 1) + newItem;
+	          newdiv.innerHTML = newItem;
 	          document.getElementById(divName).appendChild(newdiv);
 	          counter++;
 	     }
@@ -206,7 +232,13 @@
 			
 				var object = {type: "dropdown", name: dropdownName, elements:elementsList}
 				elements.push(object);
-				alert("Añadido el elemento Dropdown");
+
+				// Se genera codigo html para el dropdown.
+				var newdiv = document.createElement('li');
+	          	var newItem = " <li class=\"nav-item dropdown\">\
+	     		  			  <a class=\"nav-link dropdown-toggle\" id=\"#\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">"+dropdownName+"</a>";
+	          	newdiv.innerHTML = newItem;
+	          	document.getElementById("dynamicLinks").appendChild(newdiv);
 				break
 
 			case "link":
@@ -215,14 +247,32 @@
 				var linkOption = document.getElementById("linkOption").value;
 				var object = {type: "link", name: linkName, link: linkLink, option: linkOption}
 				elements.push(object);
-				alert("Añadido el elemento Link");
+				
+				// Se genera codigo html para los links.
+				var newdiv = document.createElement('li');
+
+	     		if (linkOption == "disabled"){
+	     			var newItem = "<li class=\"nav-item\"> <a class=\"nav-link disabled\" href=\"#\">"+linkName+"<span class=\"sr-only\">(current)</span></a> </li>";
+	     		}
+	     		else {
+	     			var newItem = "<li class=\"nav-item\"><a class=\"nav-link\" href=\"#\">"+linkName+"<span class=\"sr-only\">(current)</span></a>";
+	     		}
+	          	newdiv.innerHTML = newItem;
+	          	document.getElementById("dynamicLinks").appendChild(newdiv);
 				break
+
+
 			default:
 				var brandName = document.getElementById("navbarBrandName").value;
 				var brandImage = document.getElementById("navbarBrandLogo").value;
 				var object = {type: "brand", name: brandName, link: brandImage}
 				elements.push(object);
-				alert("Añadido el elemento Brand");
+
+				// Se genera codigo html para el Brand.
+				var newdiv = document.createElement('a');
+	          	var newItem = "<a class=\"navbar-brand\" href=\"#\">"+brandName+"</a>";
+	          	newdiv.innerHTML = newItem;
+	          	document.getElementById("dynamicBrans").appendChild(newdiv);
 				break
 		};
 
