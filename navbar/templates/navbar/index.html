@@ -92,7 +92,7 @@
 
 <form id = "generarCodigo" action="showCodigo/" method="POST" >
         {% csrf_token %}
-        <input type="text" id="location" name="location" value="" />
+        <input type="hidden" id="location" name="location" value="" />
         <input type="submit" />
 
 </form>
