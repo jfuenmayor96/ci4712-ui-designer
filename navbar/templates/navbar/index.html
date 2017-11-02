@@ -62,7 +62,7 @@
 </div>
 
 
-<div class="row" id="addBrandSection" style="display: none">
+<div class="row" id="addBrandSection">
 	<div class="col-lg-12">
 		<h2>Añadir un brand</h2>
 	</div>
@@ -85,17 +85,20 @@
 		<label for="dropdownName">Nombre del menú desplegable:</label>
 		<input type="text" name="dropdownName" id="dropdownName"/>
 	</div>
-	<div class="col-lg-12">
-		<label for="dropdownItem1">Item:</label>
-		<input type="text" name="dropdownItem1" id="dropdownItem1"/>
-	</div>
-	<div class="col-lg-12">
-		<label for="dropdownItem1Link">Link:</label>
-		<input type="text" name="dropdownItem1Link" id="dropdownItem1Link"/>
+
+	<div id="dynamicInput">
+		<div class="col-lg-12">
+			<label for="dropdownItem1">Item:</label>
+			<input type="text" name="dropdownItem1" id="dropdownItem1"/>
+		</div>
+		<div class="col-lg-12">
+			<label for="dropdownItem1Link">Link:</label>
+			<input type="text" name="dropdownItem1Link" id="dropdownItem1Link"/>
+		</div>
 	</div>
 	<button onclick="addElement('dropdown')">Añadir dropdown</button>
+	<input type="button" value="Agregar otro elemento" onClick="addInput('dynamicInput');">
 </div>
-
 
 
 <form id = "generarCodigo" action="showCodigo/" method="POST" >
@@ -112,6 +115,58 @@
 
 <script>
 	var elements = [];
+	var counter = 1;
+	var limit = 8
+
+	function showAddSection() {
+		// Obtiene el valor de la opción seleccionada
+		var selectedOption = document.getElementById("elementList").value;
+
+		// Muestra la sección correspondiente para crear el elemento a añadir y oculta 
+		// las demás secciones que no corresponden con la opción actual
+		switch(selectedOption) {
+			case "Link":
+				document.getElementById("addLinkSection").style.display = "block";
+				document.getElementById("addBrandSection").style.display = "none";
+				document.getElementById("addDropdownSection").style.display = "none";
+				break;
+
+			case "Navbar Brand":
+				document.getElementById("addBrandSection").style.display = "block";
+				document.getElementById("addLinkSection").style.display = "none";
+				document.getElementById("addDropdownSection").style.display = "none";
+				break;
+
+			default:
+				document.getElementById("addDropdownSection").style.display = "block";
+				document.getElementById("addBrandSection").style.display = "none";
+				document.getElementById("addLinkSection").style.display = "none";
+				break;
+
+
+		};
+	}
+
+	function addInput(divName){
+
+	     if (counter == limit)  {
+	          alert("You have reached the limit of adding " + counter + " inputs");
+	     }
+	     else {
+	          var newdiv = document.createElement('div');
+	          var newItem = " <br><div class=\"col-lg-12\">\
+				<label for=\"dropdownItem" +(counter + 1)+"\">Item:</label>\
+	          	<input type=\"text\" name=\"dropdownItem"+(counter + 1)+"\" id=\"dropdownItem"+(counter + 1)+"\"/>\
+	          </div>\
+	          <div class=\"col-lg-12\">\
+	          	<label for=\"dropdownItem"+(counter + 1)+"Link\">Link:</label>\
+	          	<input type=\"text\" name=\"dropdownItem"+(counter + 1)+"Link\" id=\"dropdownItem"+(counter + 1)+"Link\"/>\
+	          </div>";
+	          newdiv.innerHTML = "Entry " + (counter + 1) + newItem;
+	          document.getElementById(divName).appendChild(newdiv);
+	          counter++;
+	     }
+	}
 
 	function showAddSection() {
 		// Obtiene el valor de la opción seleccionada
@@ -146,16 +201,22 @@
 		switch(element) {
 			case "dropdown":
 
+				var elementsList = []
 				var dropdownName      = document.getElementById("dropdownName").value;
 
-				// Falta ampliar para mas elementos
-				var dropdownItem1     = document.getElementById("dropdownItem1").value;
-				var dropdownItem1Link = document.getElementById("dropdownItem1Link").value;
-				var object = {type: "dropdown", name: dropdownName, elements:[{name: dropdownItem1,link: dropdownItem1Link}]}
-				elements.push(object);
+				for (i = 1; i <= counter; i++) {
+					var dropdownItem     = document.getElementById("dropdownItem"+i).value;
+					var dropdownItemLink = document.getElementById("dropdownItem"+i+"Link").value;
 
+					var object = {name: dropdownItem,link: dropdownItemLink}
+					elementsList.push(object)
+				}
+			
+				var object = {type: "dropdown", name: dropdownName, elements:elementsList}
+				elements.push(object);
 				alert("Añadido el elemento Dropdown");
 				break
+
 			case "link":
 				var linkName = document.getElementById("linkName").value;
 				var linkLink = document.getElementById("linkLink").value;
@@ -172,7 +233,10 @@
 				alert("Añadido el elemento Brand");
 				break
 		};
-		
+
+		document.getElementById("addLinkSection").style.display = "none";
+		document.getElementById("addBrandSection").style.display = "none";
+		document.getElementById("addDropdownSection").style.display = "none";
 		console.log(elements);
 	};
 
